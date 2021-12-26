@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Beers</string>
     <string name="recipe_not_available">Beer not available in this moment, try later. Thanks</string>
+    <string name="search_title">Buscar</string>
 </resources>

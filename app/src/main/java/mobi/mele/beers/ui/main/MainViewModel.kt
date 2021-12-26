@@ -57,7 +57,15 @@ class MainViewModel(
     */
     fun doSearch(query: String) {
         viewModelScope.launch {
+            _uiModelBeers.value = UIModelBeers.Loading
             _uiModelBeers.value = UIModelBeers.Content(findBeersByNameUseCase.invoke(query))
+        }
+    }
+
+    fun cleanResponseSearch(){
+        viewModelScope.launch {
+            _uiModelBeers.value = UIModelBeers.Loading
+            _uiModelBeers.value = UIModelBeers.Content(emptyList())
         }
     }
 }

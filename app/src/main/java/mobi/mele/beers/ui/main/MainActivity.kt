@@ -1,9 +1,16 @@
 package mobi.mele.beers.ui.main
 
+import android.app.SearchManager
+import android.content.Context
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.SearchView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import mobi.mele.beers.R
 import mobi.mele.beers.databinding.ActivityMainBinding
 import mobi.mele.beers.extensions.app
@@ -34,6 +41,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.recyclerBeers.adapter = beersAdapter
+
+        /*
+        * list beersMocked
+        */
         /*beersAdapter.beers = listOf(
             Beer(id = 1, name = "Buzz", abv = 4.5,
                 description = "A light, crisp and bitte…batch brewed only once.", image_url = "https://images.punkapi.com/v2/keg.png" ),
@@ -62,6 +73,56 @@ class MainActivity : AppCompatActivity() {
         beersAdapter.notifyDataSetChanged()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        /*
+        * Cómo configurar el widget de búsqueda: https://developer.android.com/guide/topics/search/search-dialog?hl=es-419
+        */
+        menuInflater.inflate(R.menu.search_option_menu, menu)
+
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val menuItem = menu?.findItem(R.id.search)
+        val searchView = menuItem?.actionView as SearchView
+
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                /*if (!query.isNullOrBlank()) {
+                    searchBeers(query)
+                }*/
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (!newText.isNullOrBlank()) {
+                    searchBeers(newText)
+                }
+                return true
+            }
+        })
+
+        /*
+        * Si queremos que al cargar la activity automáticamente se despliegue la opción de buscar
+        */
+        //menuItem.expandActionView()
+
+        menuItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
+                searchView.isIconifiedByDefault = false
+                searchView.requestFocusFromTouch()
+                setEmptySerachView()
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
+                setRecipesInitialState()
+                return true
+            }
+        })
+
+        return true
+    }
+
     private fun updateUI(uiModelBeers: UIModelBeers) {
 
         binding.progress.visibility =
@@ -73,7 +134,7 @@ class MainActivity : AppCompatActivity() {
         notifyChangesToAdapter()
     }
 
-    private fun findBeers(query: String) {
+    private fun searchBeers(query: String) {
         mainViewModel.doSearch(query)
     }
 
@@ -81,8 +142,11 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.refresh()
     }
 
+    private fun setEmptySerachView() {
+        mainViewModel.cleanResponseSearch()
+    }
+
     private fun notifyChangesToAdapter(){
         beersAdapter.notifyDataSetChanged()
     }
-
 }
