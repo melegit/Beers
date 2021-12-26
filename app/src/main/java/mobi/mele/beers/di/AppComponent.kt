@@ -3,6 +3,8 @@ package mobi.mele.beers.di
 import android.app.Application
 import dagger.BindsInstance
 import dagger.Component
+import mobi.mele.beers.ui.main.MainComponent
+import mobi.mele.beers.ui.main.MainModule
 import javax.inject.Singleton
 
 /**
@@ -15,7 +17,7 @@ import javax.inject.Singleton
 interface AppComponent {
 
     //Aquí añadimos los distintos modulos usados en los viewModel
-    //fun plus(module: MainModule): MainComponent
+    fun plus(module: MainModule): MainComponent
     //fun plus(module: DetailModule): DetailComponent
 
     @Component.Factory

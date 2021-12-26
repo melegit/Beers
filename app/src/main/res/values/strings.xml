@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Beers</string>
+    <string name="recipe_not_available">Beer not available in this moment, try later. Thanks</string>
 </resources>
