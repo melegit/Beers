@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Spacing -->
+    <dimen name="xxxl_spacing">40dp</dimen>
+    <dimen name="xxl_spacing">32dp</dimen>
+    <dimen name="xl_spacing">24dp</dimen>
+    <dimen name="l2_spacing">20dp</dimen>
+    <dimen name="l_spacing">16dp</dimen>
+    <dimen name="m_spacing">10dp</dimen>
+    <dimen name="s_spacing">6dp</dimen>
+    <dimen name="xs_spacing">4dp</dimen>
+
+    <!-- Text sizes -->
+    <dimen name="xl_text_size">21sp</dimen>
+    <dimen name="l2_text_size">20sp</dimen>
+    <dimen name="l_text_size">18sp</dimen>
+    <dimen name="m_text_size">16sp</dimen>
+    <dimen name="s_text_size">15sp</dimen>
+    <dimen name="xs_text_size">14sp</dimen>
+    <dimen name="xxs_text_size">13sp</dimen>
+    <dimen name="xxxs_text_size">12sp</dimen>
+
+    <dimen name="page_title">@dimen/l2_text_size</dimen>
+    <dimen name="paragraph_text">@dimen/xs_text_size</dimen>
+    <dimen name="primary_text">@dimen/m_text_size</dimen>
+    <dimen name="secondary_text">@dimen/xs_text_size</dimen>
+    <dimen name="button_text">@dimen/xs_text_size</dimen>
+    <dimen name="tab_text">@dimen/xs_text_size</dimen>
+    <dimen name="input_text">@dimen/m_text_size</dimen>
+    <dimen name="card_view_corner_radius">@dimen/m_spacing</dimen>
+    <dimen name="card_view_elevation">@dimen/m_spacing</dimen>
+    <dimen name="recipe_item_height">200dp</dimen>
+    <dimen name="profile_recipe_item_height">180dp</dimen>
+    <dimen name="general_margin">@dimen/l2_text_size</dimen>
+</resources>
