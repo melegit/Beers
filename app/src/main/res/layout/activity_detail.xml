@@ -77,14 +77,22 @@
                 tools:text="abv: 0.0" />
 
             <TextView
+                android:id="@+id/descriptionTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/l2_spacing"
+                android:text="@string/description_beer"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="@dimen/page_title" />
+
+            <TextView
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/m_spacing"
                 android:text="@string/description_beer"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="@dimen/page_title"
-                android:visibility="gone"
-                tools:visibility="visible"/>
+                android:textSize="@dimen/page_title" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

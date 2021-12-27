@@ -58,6 +58,7 @@ class DetailActivity : AppCompatActivity() {
                     imageBeer?.loadUrl(it)
                 }
             }
+            abv.text = "ABV: ${beer?.abv}%"
             description.text = beer?.description
         }
     }
