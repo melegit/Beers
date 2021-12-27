@@ -20,7 +20,8 @@ class BeersRepository(private val remoteDataSource: RemoteDataSource) {
      */
     suspend fun findBeersByName(nameBeers: String): List<Beer> = remoteDataSource.findBeersByName(nameBeers)
 
-
+    /**
+     * devuelve en una lista de único objeto la receta.
+     */
     suspend fun findBeerById(id: Int): List<Beer> = remoteDataSource.findBeerById(id)
-
 }
