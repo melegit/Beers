@@ -2,4 +2,8 @@
     <string name="app_name">Beers</string>
     <string name="recipe_not_available">Beer not available in this moment, try later. Thanks</string>
     <string name="search_title">Buscar</string>
+    <string name="ingredientes_title">Ingredients</string>
+    <string name="description_beer">Description beer</string>
+    <string name="title_main">Main</string>
+    <string name="title_detail">Detail</string>
 </resources>

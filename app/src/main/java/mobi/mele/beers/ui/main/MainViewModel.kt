@@ -48,7 +48,7 @@ class MainViewModel(
     /*
     * Detecta la cerveza elegida de la lista
     */
-    fun onRecipeClicked(beer: Beer) {
+    fun onBeerClicked(beer: Beer) : Unit {
         _navigation.value = Event(beer)
     }
 

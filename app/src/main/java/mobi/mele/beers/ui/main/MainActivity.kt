@@ -2,7 +2,7 @@ package mobi.mele.beers.ui.main
 
 import android.app.SearchManager
 import android.content.Context
-import android.os.Build
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -10,14 +10,16 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import mobi.mele.beers.R
 import mobi.mele.beers.databinding.ActivityMainBinding
 import mobi.mele.beers.extensions.app
 import mobi.mele.beers.extensions.getViewModel
+import mobi.mele.beers.extensions.toParcelable
+import mobi.mele.beers.ui.detail.DetailActivity
 import mobi.mele.beers.ui.main.adapter.BeersAdapter
 import mobi.mele.beers.ui.main.MainViewModel.UIModelBeers
 
+const val EXTRA_OBJECT_BEER = "BEER"
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -36,33 +38,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        beersAdapter = BeersAdapter(emptyList()){ beer ->
-            Toast.makeText(this@MainActivity, beer.name, Toast.LENGTH_SHORT).show()
-        }
+        beersAdapter = BeersAdapter(mainViewModel::onBeerClicked)
 
         binding.recyclerBeers.adapter = beersAdapter
-
-        /*
-        * list beersMocked
-        */
-        /*beersAdapter.beers = listOf(
-            Beer(id = 1, name = "Buzz", abv = 4.5,
-                description = "A light, crisp and bitte…batch brewed only once.", image_url = "https://images.punkapi.com/v2/keg.png" ),
-            Beer(id = 2, name = "Trashy Blonde", abv = 4.1,
-                description = "A titillating, neurotic,… and imaginative twist.", image_url = "https://images.punkapi.com/v2/2.png" ),
-            Beer(id = 3, name = "Berliner Weisse With Yuzu - B-Sides", abv = 4.2,
-                description = "Japanese citrus fruit in…of this German classic.", image_url = "https://images.punkapi.com/v2/keg.png" ),
-            Beer(id = 4, name = "Pilsen Lager", abv = 6.3,
-                description = "Our Unleash the Yeast se…a hint of butterscotch.", image_url = "https://images.punkapi.com/v2/4.png" ),
-            Beer(id = 5, name = "Avery Brown Dredge", abv = 3.5,
-                description = "An Imperial Pilsner in c…e people who make them." , image_url = "https://images.punkapi.com/v2/5.png" )
-        )*/
 
         mainViewModel.uiModelBeers.observe(this, ::updateUI)
         mainViewModel.navigation.observe(this,{ event ->
             event.getContentIfNotHandled()?.let {
-                if(it.id != null){
-
+                if(it != null){
+                    val intent = Intent(this, DetailActivity::class.java).apply {
+                        putExtra(EXTRA_OBJECT_BEER, it.toParcelable())
+                    }
+                    startActivity(intent)
                 }else{
                     Toast.makeText(this, R.string.recipe_not_available,Toast.LENGTH_LONG).show()
                 }
