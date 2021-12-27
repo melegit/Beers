@@ -1,10 +1,14 @@
 package mobi.mele.beers.ui.main.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import mobi.mele.beers.R
 import mobi.mele.beers.databinding.BeerItemBinding
+import mobi.mele.beers.extensions.basicDiffUtil
+import mobi.mele.beers.extensions.inflate
 import mobi.mele.domain.dto.Beer
 
 /**
@@ -12,18 +16,16 @@ import mobi.mele.domain.dto.Beer
  * date   : 25/12/21
  * e-mail : meleappdev@gmail.com
  */
-class BeersAdapter(var beers: List<Beer>,
-                   private val beerClickedListener: (Beer) -> Unit)  :
+class BeersAdapter(private val beerClickedListener: (Beer) -> Unit)  :
     RecyclerView.Adapter<BeersAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = BeerItemBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
+    var beers: List<Beer> by basicDiffUtil(emptyList(), areContentsTheSame = {
+        old, new -> old.id == new.id
+    })
 
-        return ViewHolder(binding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = parent.inflate(R.layout.beer_item, false)
+        return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -32,11 +34,10 @@ class BeersAdapter(var beers: List<Beer>,
         holder.itemView.setOnClickListener { beerClickedListener(beer) }
     }
 
-    override fun getItemCount(): Int {
-        return beers.size
-    }
+    override fun getItemCount(): Int =beers.size
 
-    class ViewHolder(private val binding: BeerItemBinding) : RecyclerView.ViewHolder(binding.root){
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
+        private val binding = BeerItemBinding.bind(view)
         fun bind(beer: Beer) {
             binding.tvBeerNameBeerName.text = beer.name
             Glide
