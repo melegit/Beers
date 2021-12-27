@@ -14,4 +14,7 @@ class ServerDataSource : RemoteDataSource {
 
     override suspend fun findBeersByName(nameBeers: String): List<Beer> =
         ApiPunk.service.findBeersByName(nameBeers)
+
+    override suspend fun findBeerById(id: Int): List<Beer> =
+        ApiPunk.service.findBeerById(id.toString())
 }

@@ -10,4 +10,5 @@ import mobi.mele.domain.dto.Beer
 interface RemoteDataSource {
     suspend fun getBeers(): List<Beer>
     suspend fun findBeersByName(nameBeers : String): List<Beer>
+    suspend fun findBeerById(id : Int): List<Beer>
 }

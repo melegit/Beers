@@ -25,7 +25,8 @@
                 android:id="@+id/imageBeer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/general_margin"
+                android:layout_marginTop="@dimen/l2_spacing"
+                android:layout_marginBottom="@dimen/l2_spacing"
                 android:contentDescription="@null"
                 android:fitsSystemWindows="true"
                 android:scaleType="fitCenter"
@@ -64,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/general_margin"
+            android:padding="@dimen/l2_spacing"
             android:transitionGroup="true">
 
             <TextView
@@ -74,23 +75,23 @@
                 android:textSize="@dimen/page_title"
                 android:gravity="end"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                tools:text="abv: 0.0" />
+                tools:text="ABV: 0.0%" />
 
             <TextView
                 android:id="@+id/descriptionTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/l2_spacing"
-                android:text="@string/description_beer"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="@dimen/page_title" />
+                android:textSize="@dimen/page_title"
+                tools:text="@string/description_beer_title"/>
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/m_spacing"
-                android:text="@string/description_beer"
+                tools:text="@string/description_beer"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textSize="@dimen/page_title" />
         </LinearLayout>

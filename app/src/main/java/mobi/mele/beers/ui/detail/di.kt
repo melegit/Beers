@@ -4,6 +4,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.Subcomponent
 import mobi.mele.beers.parcelizeobject.BeerParcelize
+import mobi.mele.data.repository.BeersRepository
+import mobi.mele.usecases.FindBeerByIdUseCase
 
 /**
  * Created by Antonio Fernández
@@ -12,10 +14,16 @@ import mobi.mele.beers.parcelizeobject.BeerParcelize
  */
 
 @Module
-class DetailModule(private val beer: BeerParcelize?) {
+class DetailModule(private val beerId: Int) {
 
     @Provides
-    fun detailViewModelProvider() = DetailViewModel(beer)
+    fun detailViewModelProvider(
+        findBeerByIdUseCase: FindBeerByIdUseCase,
+    ) = DetailViewModel(beerId, findBeerByIdUseCase)
+
+    @Provides
+    fun findBeerByIdUseCaseProvider(beersRepository: BeersRepository) =
+        FindBeerByIdUseCase(beersRepository)
 
 }
 

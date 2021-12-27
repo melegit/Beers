@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import mobi.mele.beers.common.Event
+import mobi.mele.beers.ui.detail.DetailViewModel
 import mobi.mele.domain.dto.Beer
 import mobi.mele.usecases.FindBeersByNameUseCase
 import mobi.mele.usecases.GetBeersUseCase
@@ -23,10 +24,8 @@ class MainViewModel(
     sealed class UIModelBeers {
         object Loading : UIModelBeers()
         class Content(val beers: List<Beer>) : UIModelBeers()
+        class Navigation(val beer: Beer) : UIModelBeers()
     }
-
-    private val _navigation = MutableLiveData<Event<Beer>>()
-    val navigation: LiveData<Event<Beer>> = _navigation
 
     private val _uiModelBeers= MutableLiveData<UIModelBeers>()
     val uiModelBeers: LiveData<UIModelBeers>
@@ -49,7 +48,7 @@ class MainViewModel(
     * Detecta la cerveza elegida de la lista
     */
     fun onBeerClicked(beer: Beer) : Unit {
-        _navigation.value = Event(beer)
+        _uiModelBeers.value = UIModelBeers.Navigation(beer)
     }
 
     /*

@@ -18,4 +18,7 @@ interface ApiPunkService {
 
     @GET("beers")
     suspend fun findBeersByName(@Query("beer_name")nameBeers : String): List<Beer>
+
+    @GET("beers")
+    suspend fun findBeerById(@Query("ids")id : String): List<Beer>
 }

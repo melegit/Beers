@@ -1,5 +1,10 @@
 package mobi.mele.beers.ui.main
 
+/**
+ * Created by Antonio Fernández
+ * date   : 27/12/21
+ * e-mail : meleappdev@gmail.com
+ */
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
@@ -10,16 +15,18 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import mobi.mele.beers.R
 import mobi.mele.beers.databinding.ActivityMainBinding
 import mobi.mele.beers.extensions.app
 import mobi.mele.beers.extensions.getViewModel
+import mobi.mele.beers.extensions.startActivity
 import mobi.mele.beers.extensions.toParcelable
 import mobi.mele.beers.ui.detail.DetailActivity
+import mobi.mele.beers.ui.detail.DetailViewModel
 import mobi.mele.beers.ui.main.adapter.BeersAdapter
 import mobi.mele.beers.ui.main.MainViewModel.UIModelBeers
 
-const val EXTRA_OBJECT_BEER = "BEER"
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -39,15 +46,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         beersAdapter = BeersAdapter(mainViewModel::onBeerClicked)
-
         binding.recyclerBeers.adapter = beersAdapter
+        mainViewModel.uiModelBeers.observe(this, Observer(::updateUI))
 
-        mainViewModel.uiModelBeers.observe(this, ::updateUI)
-        mainViewModel.navigation.observe(this,{ event ->
+        /*mainViewModel.navigation.observe(this,{ event ->
             event.getContentIfNotHandled()?.let {
                 if(it != null){
                     val intent = Intent(this, DetailActivity::class.java).apply {
-                        putExtra(EXTRA_OBJECT_BEER, it.toParcelable())
+                        putExtra(
+                            , it.toParcelable())
                     }
                     startActivity(intent)
                 }else{
@@ -55,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-        })
+        })*/
 
         beersAdapter.notifyDataSetChanged()
     }
@@ -115,8 +122,12 @@ class MainActivity : AppCompatActivity() {
         binding.progress.visibility =
             if (uiModelBeers is UIModelBeers.Loading) View.VISIBLE else View.GONE
 
-        if (uiModelBeers is UIModelBeers.Content) {
-            beersAdapter.beers = uiModelBeers.beers
+        when (uiModelBeers){
+            is UIModelBeers.Content -> beersAdapter.beers = uiModelBeers.beers
+            is UIModelBeers.Navigation -> startActivity<DetailActivity> {
+                println(uiModelBeers.beer.id)
+                putExtra(DetailActivity.BEER, uiModelBeers.beer.id)
+            }
         }
         notifyChangesToAdapter()
     }

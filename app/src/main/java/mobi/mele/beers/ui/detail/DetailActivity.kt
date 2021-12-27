@@ -17,6 +17,10 @@ import mobi.mele.beers.parcelizeobject.BeerParcelize
  */
 class DetailActivity : AppCompatActivity() {
 
+    companion object {
+        const val BEER = "DetailActivity:beer"
+    }
+
     private lateinit var binding: ActivityDetailBinding
 
     private lateinit var component: DetailComponent
@@ -25,7 +29,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        component = app.component.plus(DetailModule(intent.getParcelableExtra<BeerParcelize>("BEER")))
+        component = app.component.plus(DetailModule(intent.getIntExtra(BEER, -1)))
 
         super.onCreate(savedInstanceState)
 
@@ -49,17 +53,13 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun updateUI(uiModelBeer: DetailViewModel.UiModelBeer) {
-        val beer= uiModelBeer.beer
+        val beer = uiModelBeer.beer
 
         with(binding) {
-            collapsingToolbar.title = beer?.name
-            beer?.image_url.let {
-                if (it != null) {
-                    imageBeer?.loadUrl(it)
-                }
-            }
-            abv.text = "ABV: ${beer?.abv}%"
-            description.text = beer?.description
+            collapsingToolbar.title = beer[0].name
+            imageBeer.loadUrl(beer[0].image_url)
+            abv.text = "ABV: ${beer[0].abv}%"
+            description.text = beer[0].description
         }
     }
 }

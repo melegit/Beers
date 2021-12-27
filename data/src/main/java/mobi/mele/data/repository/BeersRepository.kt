@@ -19,4 +19,8 @@ class BeersRepository(private val remoteDataSource: RemoteDataSource) {
      * devuelve una lista de cervezas que contengan en el nombre la cadena nameBeers
      */
     suspend fun findBeersByName(nameBeers: String): List<Beer> = remoteDataSource.findBeersByName(nameBeers)
+
+
+    suspend fun findBeerById(id: Int): List<Beer> = remoteDataSource.findBeerById(id)
+
 }
