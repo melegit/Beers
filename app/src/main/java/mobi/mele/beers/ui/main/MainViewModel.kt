@@ -23,8 +23,8 @@ class MainViewModel(
 
     sealed class UIModelBeers {
         object Loading : UIModelBeers()
-        class Content(val beers: List<Beer>) : UIModelBeers()
-        class Navigation(val beer: Beer) : UIModelBeers()
+        data class Content(val beers: List<Beer>) : UIModelBeers()
+        data class Navigation(val beer: Beer) : UIModelBeers()
     }
 
     private val _uiModelBeers= MutableLiveData<UIModelBeers>()

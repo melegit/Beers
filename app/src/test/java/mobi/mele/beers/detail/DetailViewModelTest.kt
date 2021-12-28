@@ -7,6 +7,7 @@ import kotlinx.coroutines.test.runBlockingTest
 import mobi.mele.beers.MainCoroutineScopeRule
 import mobi.mele.beers.ui.detail.DetailViewModel
 import mobi.mele.beers.ui.detail.DetailViewModel.*
+import mobi.mele.beers.ui.main.MainViewModel
 import mobi.mele.domain.dto.Beer
 import mobi.mele.testshared.mockedBeer
 import mobi.mele.usecases.FindBeerByIdUseCase
@@ -62,6 +63,21 @@ class DetailViewModelTest {
             detailViewModel.uiModelBeer.observeForever(observer)
 
             //THEN
-            verify(observer).onChanged(UiModelBeer(beer))
+            verify(observer).onChanged(UiModelBeer.Content(beer))
         }
+
+    @Test
+    fun `before getBeer, loading is shown`() {
+        coroutineScope.runBlockingTest{
+
+            val beer = listOf<Beer>(mockedBeer.copy(1))
+            whenever(findBeerByIdUseCase.invoke(5)).thenReturn(beer)
+
+            detailViewModel.uiModelBeer.observeForever(observer)
+
+            detailViewModel.findBeer()
+
+            verify(observer).onChanged(UiModelBeer.Loading)
+        }
+    }
 }
