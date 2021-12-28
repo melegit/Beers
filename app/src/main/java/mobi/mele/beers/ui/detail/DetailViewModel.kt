@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import mobi.mele.beers.parcelizeobject.BeerParcelize
+import mobi.mele.beers.ui.main.MainViewModel
 import mobi.mele.domain.dto.Beer
 import mobi.mele.usecases.FindBeerByIdUseCase
 
@@ -19,7 +20,10 @@ class DetailViewModel(
     private val findBeerByIdUseCase: FindBeerByIdUseCase
     ) : ViewModel() {
 
-    data class UiModelBeer(val beer: List<Beer>)
+    sealed class UiModelBeer {
+        object Loading : UiModelBeer()
+        data class Content(val beer: List<Beer>) : UiModelBeer()
+    }
 
     private val _uiModelBeer = MutableLiveData<UiModelBeer>()
     val uiModelBeer: LiveData<UiModelBeer>
@@ -28,10 +32,10 @@ class DetailViewModel(
             return _uiModelBeer
         }
 
-    private fun findBeer() {
+    fun findBeer() {
         viewModelScope.launch {
-            _uiModelBeer.value = UiModelBeer(findBeerByIdUseCase.invoke(beerId))
+            _uiModelBeer.value = UiModelBeer.Loading
+            _uiModelBeer.value = UiModelBeer.Content(findBeerByIdUseCase.invoke(beerId))
         }
-
     }
 }

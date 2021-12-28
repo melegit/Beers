@@ -1,6 +1,7 @@
 package mobi.mele.beers.ui.detail
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import mobi.mele.beers.R
@@ -8,7 +9,11 @@ import mobi.mele.beers.databinding.ActivityDetailBinding
 import mobi.mele.beers.extensions.app
 import mobi.mele.beers.extensions.getViewModel
 import mobi.mele.beers.extensions.loadUrl
+import mobi.mele.beers.extensions.startActivity
 import mobi.mele.beers.parcelizeobject.BeerParcelize
+import mobi.mele.beers.ui.detail.DetailViewModel.UiModelBeer
+import mobi.mele.beers.ui.main.MainViewModel
+import mobi.mele.domain.dto.Beer
 
 /**
  * Created by Antonio Fernández
@@ -52,14 +57,19 @@ class DetailActivity : AppCompatActivity() {
         overridePendingTransition(0, R.anim.slide_out)
     }
 
-    private fun updateUI(uiModelBeer: DetailViewModel.UiModelBeer) {
-        val beer = uiModelBeer.beer
+    private fun updateUI(uiModelBeer: UiModelBeer) {
+        binding.progress.visibility =
+            if (uiModelBeer is UiModelBeer.Loading) View.VISIBLE else View.GONE
 
-        with(binding) {
-            collapsingToolbar.title = beer[0].name
-            imageBeer.loadUrl(beer[0].image_url)
-            abv.text = "ABV: ${beer[0].abv}%"
-            description.text = beer[0].description
+        when (uiModelBeer){
+            is UiModelBeer.Content -> {
+                with(binding) {
+                    collapsingToolbar.title = uiModelBeer.beer[0].name
+                    imageBeer.loadUrl(uiModelBeer.beer[0].image_url)
+                    abv.text = "ABV: ${uiModelBeer.beer[0].abv}%"
+                    description.text = uiModelBeer.beer[0].description
+                }
+            }
         }
     }
 }

@@ -7,6 +7,18 @@
     android:fitsSystemWindows="true"
     tools:context=".ui.detail.DetailActivity">
 
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchor="@+id/nestedScrollView"
+        app:layout_anchorGravity="top|center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
@@ -57,6 +69,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -72,9 +85,9 @@
                 android:id="@+id/abv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/page_title"
                 android:gravity="end"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="@dimen/page_title"
                 tools:text="ABV: 0.0%" />
 
             <TextView
@@ -82,18 +95,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/l2_spacing"
+                android:text="@string/description_beer_title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="@dimen/page_title"
-                tools:text="@string/description_beer_title"/>
+                android:textSize="@dimen/page_title" />
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/m_spacing"
-                tools:text="@string/description_beer"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="@dimen/page_title" />
+                android:textSize="@dimen/page_title"
+                tools:text="@string/description_beer" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

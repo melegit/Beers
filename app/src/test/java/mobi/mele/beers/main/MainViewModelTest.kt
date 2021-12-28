@@ -64,4 +64,31 @@ class MainViewModelTesT {
             verify(observer).onChanged(UIModelBeers.Loading)
         }
     }
+
+    @Test
+    fun `beers are loaded`() {
+        coroutineScope.runBlockingTest {
+
+            val beers = listOf<Beer>(mockedBeer.copy(1))
+            whenever(getBeersUseCase.invoke()).thenReturn(beers)
+
+            viewModel.uiModelBeers.observeForever(observer)
+
+            verify(observer).onChanged(UIModelBeers.Content(beers))
+        }
+    }
+
+    @Test
+    fun `return the beers found`() {
+        coroutineScope.runBlockingTest{
+
+            val beers = listOf<Beer>(mockedBeer.copy(1))
+            whenever(findBeersByNameUseCase.invoke("B")).thenReturn(beers)
+            viewModel.uiModelBeers.observeForever(observer)
+
+            viewModel.doSearch("B")
+
+            verify(observer).onChanged(UIModelBeers.Content(beers))
+        }
+    }
 }
