@@ -9,11 +9,7 @@ import mobi.mele.beers.databinding.ActivityDetailBinding
 import mobi.mele.beers.extensions.app
 import mobi.mele.beers.extensions.getViewModel
 import mobi.mele.beers.extensions.loadUrl
-import mobi.mele.beers.extensions.startActivity
-import mobi.mele.beers.parcelizeobject.BeerParcelize
 import mobi.mele.beers.ui.detail.DetailViewModel.UiModelBeer
-import mobi.mele.beers.ui.main.MainViewModel
-import mobi.mele.domain.dto.Beer
 
 /**
  * Created by Antonio Fernández

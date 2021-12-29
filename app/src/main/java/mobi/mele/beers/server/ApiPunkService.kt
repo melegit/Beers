@@ -2,7 +2,6 @@ package mobi.mele.beers.server
 
 import mobi.mele.domain.dto.Beer
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 /**

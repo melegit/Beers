@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import mobi.mele.beers.parcelizeobject.BeerParcelize
-import mobi.mele.beers.ui.main.MainViewModel
 import mobi.mele.domain.dto.Beer
 import mobi.mele.usecases.FindBeerByIdUseCase
 
@@ -32,6 +30,9 @@ class DetailViewModel(
             return _uiModelBeer
         }
 
+    /*
+    * Devuelve una list<Beer> con un solo item, la cerveza cuyo identificador coincida pasado
+    */
     fun findBeer() {
         viewModelScope.launch {
             _uiModelBeer.value = UiModelBeer.Loading

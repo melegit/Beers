@@ -7,23 +7,19 @@ package mobi.mele.beers.ui.main
  */
 import android.app.SearchManager
 import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import mobi.mele.beers.R
 import mobi.mele.beers.databinding.ActivityMainBinding
 import mobi.mele.beers.extensions.app
 import mobi.mele.beers.extensions.getViewModel
 import mobi.mele.beers.extensions.startActivity
-import mobi.mele.beers.extensions.toParcelable
 import mobi.mele.beers.ui.detail.DetailActivity
-import mobi.mele.beers.ui.detail.DetailViewModel
 import mobi.mele.beers.ui.main.adapter.BeersAdapter
 import mobi.mele.beers.ui.main.MainViewModel.UIModelBeers
 
@@ -48,21 +44,6 @@ class MainActivity : AppCompatActivity() {
         beersAdapter = BeersAdapter(mainViewModel::onBeerClicked)
         binding.recyclerBeers.adapter = beersAdapter
         mainViewModel.uiModelBeers.observe(this, Observer(::updateUI))
-
-        /*mainViewModel.navigation.observe(this,{ event ->
-            event.getContentIfNotHandled()?.let {
-                if(it != null){
-                    val intent = Intent(this, DetailActivity::class.java).apply {
-                        putExtra(
-                            , it.toParcelable())
-                    }
-                    startActivity(intent)
-                }else{
-                    Toast.makeText(this, R.string.recipe_not_available,Toast.LENGTH_LONG).show()
-                }
-            }
-
-        })*/
 
         beersAdapter.notifyDataSetChanged()
     }

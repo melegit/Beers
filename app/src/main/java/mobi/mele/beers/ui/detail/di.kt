@@ -3,7 +3,6 @@ package mobi.mele.beers.ui.detail
 import dagger.Module
 import dagger.Provides
 import dagger.Subcomponent
-import mobi.mele.beers.parcelizeobject.BeerParcelize
 import mobi.mele.data.repository.BeersRepository
 import mobi.mele.usecases.FindBeerByIdUseCase
 
