@@ -18,7 +18,6 @@ import javax.inject.Singleton
 @Component(modules = [AppModule::class, DataModule::class])
 interface AppComponent {
 
-    //Aquí añadimos los distintos modulos usados en los viewModel
     fun plus(module: MainModule): MainComponent
     fun plus(module: DetailModule): DetailComponent
 

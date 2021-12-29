@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import mobi.mele.beers.common.Event
-import mobi.mele.beers.ui.detail.DetailViewModel
 import mobi.mele.domain.dto.Beer
 import mobi.mele.usecases.FindBeersByNameUseCase
 import mobi.mele.usecases.GetBeersUseCase
@@ -47,7 +45,7 @@ class MainViewModel(
     /*
     * Detecta la cerveza elegida de la lista
     */
-    fun onBeerClicked(beer: Beer) : Unit {
+    fun onBeerClicked(beer: Beer) {
         _uiModelBeers.value = UIModelBeers.Navigation(beer)
     }
 
@@ -61,6 +59,9 @@ class MainViewModel(
         }
     }
 
+    /*
+    * Borra el listado de cervezas cada que que se pulsa la opción buscar
+    */
     fun cleanResponseSearch(){
         viewModelScope.launch {
             _uiModelBeers.value = UIModelBeers.Loading

@@ -7,7 +7,6 @@ import kotlinx.coroutines.test.runBlockingTest
 import mobi.mele.beers.MainCoroutineScopeRule
 import mobi.mele.beers.ui.main.MainViewModel
 import mobi.mele.beers.ui.main.MainViewModel.UIModelBeers
-import mobi.mele.domain.dto.Beer
 import mobi.mele.testshared.mockedBeer
 import mobi.mele.usecases.FindBeersByNameUseCase
 import mobi.mele.usecases.GetBeersUseCase
@@ -55,7 +54,7 @@ class MainViewModelTesT {
     fun `before getBeers, loading is shown`() {
         coroutineScope.runBlockingTest{
 
-            val beers = listOf<Beer>(mockedBeer.copy(1))
+            val beers = listOf(mockedBeer.copy(1))
             whenever(getBeersUseCase.invoke()).thenReturn(beers)
             viewModel.uiModelBeers.observeForever(observer)
 
@@ -69,7 +68,7 @@ class MainViewModelTesT {
     fun `beers are loaded`() {
         coroutineScope.runBlockingTest {
 
-            val beers = listOf<Beer>(mockedBeer.copy(1))
+            val beers = listOf(mockedBeer.copy(1))
             whenever(getBeersUseCase.invoke()).thenReturn(beers)
 
             viewModel.uiModelBeers.observeForever(observer)
@@ -82,7 +81,7 @@ class MainViewModelTesT {
     fun `return the beers found`() {
         coroutineScope.runBlockingTest{
 
-            val beers = listOf<Beer>(mockedBeer.copy(1))
+            val beers = listOf(mockedBeer.copy(1))
             whenever(findBeersByNameUseCase.invoke("B")).thenReturn(beers)
             viewModel.uiModelBeers.observeForever(observer)
 
