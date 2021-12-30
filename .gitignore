@@ -7,6 +7,7 @@
 /domain/build
 /data/build
 /usecases/build
+/testShared/build
 .DS_Store
 /captures
 .externalNativeBuild
