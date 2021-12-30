@@ -60,10 +60,10 @@ class DetailActivity : AppCompatActivity() {
         when (uiModelBeer){
             is UiModelBeer.Content -> {
                 with(binding) {
-                    collapsingToolbar.title = uiModelBeer.beer[0].name
-                    imageBeer.loadUrl(uiModelBeer.beer[0].image_url)
-                    abv.text = "ABV: ${uiModelBeer.beer[0].abv}%"
-                    description.text = uiModelBeer.beer[0].description
+                    collapsingToolbar.title = uiModelBeer.beer[0].name ?: "Name not found or null"
+                    imageBeer.loadUrl(uiModelBeer.beer[0].image_url ?: "https://bitsofco.de/content/images/2018/12/broken-1.png")
+                    abv.text = "ABV: ${uiModelBeer.beer[0].abv ?: 0.0}%"
+                    description.text = uiModelBeer.beer[0].description ?: "Description not found or null"
                 }
             }
         }

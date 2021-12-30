@@ -9,4 +9,4 @@ import mobi.mele.domain.dto.Beer
  * e-mail : meleappdev@gmail.com
  */
 
-fun Beer.toParcelable() = BeerParcelize(this.id, this.name, this.abv, this.description, this.image_url)
+//fun Beer.toParcelable() = BeerParcelize(this.id, this.name, this.abv, this.description, this.image_url)
