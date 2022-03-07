@@ -16,7 +16,7 @@ import mobi.mele.usecases.FindBeerByIdUseCase
 class DetailViewModel(
     private val beerId: Int,
     private val findBeerByIdUseCase: FindBeerByIdUseCase
-    ) : ViewModel() {
+) : ViewModel() {
 
     sealed class UiModelBeer {
         object Loading : UiModelBeer()
@@ -31,7 +31,7 @@ class DetailViewModel(
         }
 
     /*
-    * Devuelve una list<Beer> con un solo item, la cerveza cuyo identificador coincida pasado
+    * Devuelve una list<Beer> con un solo item, la cerveza cuyo identificador pasado coincida
     */
     fun findBeer() {
         viewModelScope.launch {
