@@ -1,6 +1,7 @@
 package mobi.mele.beers.ui.main.adapter
 
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -21,6 +22,7 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.recyclerview.widget.RecyclerView
 import coil.compose.rememberAsyncImagePainter
 import mobi.mele.beers.extensions.basicDiffUtil
@@ -64,18 +66,15 @@ class BeersAdapter(private val beerClickedListener: (Beer) -> Unit) :
 
         fun bind(beer: Beer) {
             composeView.setContent {
-                MaterialTheme {
-                    BeerItem(
-                        modifier = Modifier.clickable { beerClickedListener(beer) },
-                        beer = beer
-                    )
-                }
+                AndroidView(factory = {
+                    TextView(it).apply {
+                        setOnClickListener { beerClickedListener(beer) }
+                    }
+                },
+                update = {
+                    it.text = beer.name
+                })
             }
-            /*binding.tvBeerNameBeerName.text = beer.name
-            Glide
-                .with(binding.root.context)
-                .load(beer.image_url)
-                .into(binding.imageBeer)*/
         }
     }
 }
