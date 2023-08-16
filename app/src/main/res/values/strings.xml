@@ -96,4 +96,6 @@
     <string name="title_detail">Detail</string>
     <string name="title_splash">Search Beers</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="activity_compose_title">Activity in jetpack compose</string>
+    <string name="activity_compose_description_info">setContent is a function that allows you to set a composed content for your \'Activity\'.</string>
 </resources>
