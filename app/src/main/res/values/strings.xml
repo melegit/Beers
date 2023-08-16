@@ -98,4 +98,5 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="activity_compose_title">Activity in jetpack compose</string>
     <string name="activity_compose_description_info">setContent is a function that allows you to set a composed content for your \'Activity\'.</string>
+    <string name="fragment_compose">I\'m a compose fragment</string>
 </resources>
