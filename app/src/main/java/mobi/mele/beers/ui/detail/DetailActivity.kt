@@ -66,6 +66,9 @@ class DetailActivity : AppCompatActivity() {
                     description.text = uiModelBeer.beer[0].description ?: "Description not found or null"
                 }
             }
+            else -> {
+
+            }
         }
     }
 }
