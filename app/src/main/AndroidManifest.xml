@@ -12,28 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_beer_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Beers">
-        <activity
-            android:name=".ui.compose.MainActivity"
-            android:exported="true"
-            android:label="@string/title_activity_main"
-            android:theme="@style/Theme.Beers">
+        <activity android:name=".ui.splash.SplashActivity" android:theme="@style/splash"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.splash.SplashActivity"
-            android:exported="true"
-            android:theme="@style/splash">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".ui.main.MainActivity" />
+        <activity android:name=".ui.main.MainActivity"/>
         <activity
             android:name=".ui.detail.DetailActivity"
             android:theme="@style/Theme.Beers.NoActionBar" />
