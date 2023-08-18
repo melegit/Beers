@@ -23,8 +23,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.recyclerview.widget.RecyclerView
 import coil.compose.rememberAsyncImagePainter
+import com.bumptech.glide.Glide
+import mobi.mele.beers.databinding.BeerItemBinding
 import mobi.mele.beers.extensions.basicDiffUtil
 import mobi.mele.domain.dto.Beer
 
@@ -47,7 +50,7 @@ class BeersAdapter(private val beerClickedListener: (Beer) -> Unit) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val beer = beers[position]
         holder.bind(beer)
-        holder.itemView.setOnClickListener { beerClickedListener(beer) }
+        //holder.itemView.setOnClickListener { beerClickedListener(beer) }
     }
 
     override fun getItemCount(): Int = beers.size
@@ -66,14 +69,19 @@ class BeersAdapter(private val beerClickedListener: (Beer) -> Unit) :
 
         fun bind(beer: Beer) {
             composeView.setContent {
-                AndroidView(factory = {
-                    TextView(it).apply {
-                        setOnClickListener { beerClickedListener(beer) }
+                AndroidViewBinding(
+                    factory = BeerItemBinding::inflate,
+                    update = {
+                        Glide
+                            .with(this.root.context)
+                            .load(beer.image_url)
+                            .into(imageBeer)
+                        tvBeerNameBeerName.text = beer.name
+                        root.setOnClickListener{
+                            beerClickedListener(beer)
+                        }
                     }
-                },
-                update = {
-                    it.text = beer.name
-                })
+                )
             }
         }
     }
